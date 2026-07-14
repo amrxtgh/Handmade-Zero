@@ -71,17 +71,16 @@ int main(int, char *[]) {
         return 1;
     }
 
-    SDL_Window *Window = SDL_CreateWindow("Handmade Zero", 1280, 720, 0);
-    /*
-    ResizeBackbuffer(&GlobalBackBuffer, 1280, 720);
+    // SDL_Window *Window = SDL_CreateWindow("Handmade Zero", 1280, 720, 0);
+    
     SDL_PropertiesID Props = SDL_CreateProperties();
-    SDL_SetStringProperty(Props, SDL_PROP_WINDOW_CREATE_TITLE_SaTRING, "Handmade Zero");
+    SDL_SetStringProperty(Props, SDL_PROP_WINDOW_CREATE_TITLE_STRING, "Handmade Zero");
     SDL_SetNumberProperty(Props, SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, 1280);
     SDL_SetNumberProperty(Props, SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, 720);
     SDL_SetBooleanProperty(Props, SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN, true);
     SDL_Window* Window = SDL_CreateWindowWithProperties(Props);
     SDL_DestroyProperties(Props);
-    */
+
     if (!Window) {
         SDL_Log("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         SDL_Quit();
