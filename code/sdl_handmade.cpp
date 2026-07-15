@@ -65,7 +65,7 @@ internal void RenderWeirdGradient(sdl_window_buffer *Buffer, int BlueOffset, int
     }
 }
 
-int main(int, char *[]) {
+int main(int argc, char *argv[]) {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         SDL_Log("SDL could not initialize! SDL error: %s\n", SDL_GetError());
         return 1;
@@ -111,15 +111,14 @@ int main(int, char *[]) {
             }
         }
         RenderWeirdGradient(&GlobalBackBuffer, XOffset, YOffset);
-        XOffset += 1;
-        YOffset += 2;
+
+        XOffset += 100;
+        YOffset += 200;
 
         SDL_UpdateTexture(GlobalTexture, NULL, GlobalBackBuffer.Memory, GlobalBackBuffer.Pitch);
 
         // memcpy(WindowSurface->pixels, GlobalBackBuffer.Memory,
         //     GlobalBackBuffer.Width * GlobalBackBuffer.Height * GlobalBackBuffer.BytesPerPixel);
-
-        SDL_RenderClear(Renderer);
         SDL_RenderTexture(Renderer, GlobalTexture, NULL, NULL);
         SDL_RenderPresent(Renderer);
     }
