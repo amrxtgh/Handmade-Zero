@@ -1,4 +1,5 @@
 #include <SDL3/SDL.h>
+#include <SDL3/SDL_video.h>
 #include <cstdint>
 #include <cstring>
 #include <sys/mman.h>
@@ -17,6 +18,16 @@ struct sdl_window_buffer {
     int BytesPerPixel;
     int Pitch;
 };
+struct sdl_window_dimensions {
+	int Width;
+	int Height;
+};
+
+internal sdl_window_dimensions GetWindowDimensions(SDL_Window *Window) {
+	sdl_window_dimensions Result;
+	SDL_GetWindowSize(Window, &Result.Width, &Result.Height);
+	return Result;
+}
 
 global_variable sdl_window_buffer GlobalBackBuffer;
 global_variable SDL_Texture* GlobalTexture = nullptr;
@@ -87,12 +98,15 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     SDL_Renderer* Renderer = SDL_CreateRenderer(Window, NULL);
+
     if (!Renderer) {
         SDL_Log("Renderer creation failed: %s\n", SDL_GetError());
         SDL_DestroyWindow(Window);
         SDL_Quit();
         return 1;
     }
+
+
 
     ResizeBackbuffer(Renderer, &GlobalBackBuffer, 1280, 720);
 
